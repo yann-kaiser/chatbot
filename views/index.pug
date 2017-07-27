@@ -1,0 +1,19 @@
+html
+  head
+    meta(charset="utf-8")
+    title ChatBot
+    link(href="css/main.css", rel="stylesheet")
+  body
+    header
+      form(action="", method="post")
+        input(type="text", name="question", value="")
+        button(type="submit", name="send-question") Send question
+
+    main
+      each msg in messages
+        if msg.sender == 'user'
+          div.message.user
+            p #{msg.text}
+        else
+          div.message.robot
+            p #{msg.text}

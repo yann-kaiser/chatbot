@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
+
+html, body {
+  font-family: Roboto;
+  font-weight: 300;
+}
+
+form input {
+  line-height: 30px;
+  font-size: 14pt;
+}
+
+.message {
+  width: 100%;
+  clear: both;
+}
+
+.message p {
+  display: inline;
+  height: 20px;
+  width: auto;
+  font-size: 14pt;
+  padding: 10px 15px;
+  border-radius: 40px;
+  margin: 5px 0;
+}
+
+.user p {
+  background-color: #0284FF;
+  color: white;
+  float:right;
+
+}
+
+
+.robot p {
+  background-color: #CCC;
+  float:left;
+}
