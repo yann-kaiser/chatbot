@@ -31,12 +31,15 @@ const actions = {
   },
   getWeather ({ context, entities }) {
     return new Promise(function (resolve, reject) {
-      let loc = entities.location[0] ? entities.location[0].value : 'Paris'
+      let loc = entities.location ? entities.location[0].value : 'Paris'
 
       return api.callWeatherAPICallback(loc, (weather) => {
+        if (weather == null) {
+          reject()
+        }
         context.weather = weather
 
-        if (entities.location[0] !== undefined) {
+        if (entities.location) {
           context.location = entities.location[0].value
         }
         return resolve(context)
