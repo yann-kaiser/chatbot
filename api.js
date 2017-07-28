@@ -1,18 +1,18 @@
 let request = require('request')
 
 module.exports.callWeatherAPI = (location /* : string */) /* : string */ => {
-  location = encodeURI(location)
-
+  let loc = encodeURI(location)
   var URL = 'http://api.openweathermap.org/data/2.5/weather?'
-  URL += 'q=' + location
+  URL += 'q=' + loc
   URL += '&APPID=30248b03d4b8067fcbee8cf67702affd'
 
   return request(URL, (error, response, body) => {
-    if (error) {
+    body = JSON.parse(body)
+    let weather = body.weather
+    if (!weather) {
       return null
     }
-    body = JSON.parse(body)
-    var wth = body.weather[0].main.toLowerCase()
+    var wth = weather[0].main.toLowerCase()
 
     return module.exports.getWeatherDesc(wth)
   })
@@ -23,14 +23,14 @@ module.exports.callWeatherAPICallback = (location /* : string */, callback /* : 
   var URL = 'http://api.openweathermap.org/data/2.5/weather?'
   URL += 'q=' + loc
   URL += '&APPID=30248b03d4b8067fcbee8cf67702affd'
-
   return request(URL, (error, response, body) => {
-    if (error) {
-      return null
-    }
     body = JSON.parse(body)
-    console.log(body)
-    var wth = body.weather[0].main.toLowerCase()
+
+    let weather = body.weather
+    if (!weather) {
+      return callback(null)
+    }
+    let wth = weather[0].main.toLowerCase()
     return callback(module.exports.getWeatherDesc(wth))
   })
 }
